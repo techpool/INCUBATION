@@ -3,26 +3,42 @@
         <title>Profile</title>
         <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
         <script>
-            var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
-            var authData = ref.getAuth();
-            if (authData) {
-                console.log("Authenticated user with uid:", authData.uid);
+            
+            
+            //Function that redirects to the registration page
+            function Redirect() {
+               window.location="/register.html";
             }
             
-            var usersRef = ref.child("users");
-            usersRef.child(authData.uid).set({
-                date_of_birth: "June 23, 1912",
-                full_name: authData.facebook.email,
-                registration_time: Firebase.ServerValue.TIMESTAMP
-            });
-                        
-            var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
-                    
+            //Reference variable for the primary database
+            var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
+            var authData = ref.getAuth();
+            console.log(authData);
+            if (authData) {
+                
+                console.log("Authenticated user with uid:", authData.uid);
+                
+                //reference to the user collection which is the child of the primary database
+                var usersRef = ref.child("users");
+                if(authData.provider == "facebook"){
+                    var email = authData.facebook.email;
+                } else {
+                    var email = authData.password.email;
+                }
+                //Updates the already registered person with the necessary infos
+                usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                    //Last login time updated
+                    last_login_time: Firebase.ServerValue.TIMESTAMP
+                });
+                
+            } else {
+                
+                //Incase the user is not authorised or logged in and opens this page directly
+                //The user gets redirected to the register or login page.
+                //Redirect();
+            }
             
-            users.orderByChild("registration_time").on("child_added", function(snapshot) {
-                console.log(snapshot.val());
-            });
-                    
+            
         </script>
     </head>
     <body>

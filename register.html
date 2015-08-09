@@ -6,21 +6,69 @@
         <script>
             var ref = new Firebase("blistering-heat-273.firebaseio.com");
             
-            
+            //Redirection function to the profile page
             function Redirect() {
                window.location="/profile.html";
             }
             
-            function userCreation(email, password){
+            function general_login(email, password){
+                 ref.authWithPassword({
+                                email    : email,
+                                password : password
+                            }, function(error, authData) {
+                                if (error) {
+                                    console.log("Login Failed!", error.message);
+                                } else {
+                                    console.log("Authenticated successfully with payload:", authData);
+                                    Redirect();
+                                }
+                            });
+            }
+            
+            function userCreation_normal(email, password){
+                ref.createUser({
+                    email    : email,
+                    password : password
+                    }, function(error, userData) {
+                    if (error) {
+                        console.log(error);
+                        console.log("Trying to login with the same username and password");
+                        //Incase the user already exists it tries to login with the same email and password
+                        if(error.message == "The specified email address is already in use."){
+                            console.log("True");
+                            general_login(email, password);
+                        }
+                       
+                    } else {
+                        console.log("Successfully created user account with uid:", userData.uid);
+                        var usersRef = ref.child("users");
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
+                            //Initial time when the user is registered gets set.
+                            registration_time: Firebase.ServerValue.TIMESTAMP
+                        });
+                        general_login(email, password);
+                    }
+                });
+            }
+            
+            //Function for creating new user in the database
+            function userCreation_facebook(email, password){
                 ref.createUser({
                     email    : email,
                     password : password
                     }, function(error, userData) {
                     if (error) {
                         console.log("Error creating user:", error);
+                        //Incase the user is already registered, the user is redirected to the profile page
                         Redirect();
                     } else {
                         console.log("Successfully created user account with uid:", userData.uid);
+                        var usersRef = ref.child("users");
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
+                            //Initial time when the user is registered gets set.
+                            registration_time: Firebase.ServerValue.TIMESTAMP
+                        });
+                        Redirect();
                     }
                 });
             }
@@ -30,31 +78,30 @@
                     if (error) {
                         console.log("Login Failed!", error);
                     } else {
+                        this.userData = authData;
                         console.log("Authenticated successfully with payload:", authData);
-                        userCreation(authData.facebook.email, authData.facebook.accessToken);
+                        userCreation_facebook(authData.facebook.email, authData.facebook.accessToken);
                     }
                 });
             }
             
-            //  10203517179768816
-            // "10201316671077474"
-            // 10203517179768816
+            function dr(){
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                userCreation_normal(email, password);
+
+            }
             
         </script>
     </head>
     <body>
-        <form>
+        
             <ul>
-                <li><label>Username: </label><input id="username" type="text" placeholder="Username" required></li>
-                <li><label>Email: </label><input type="email" placeholder="Email ID" required></li>
-                <li><label>Stream: </label>
-                    <input type="radio"> CSE
-                    <input type="radio"> EE
-                    <input type="radio"> ECE
-                    <input type="radio"> ME</li>
-                <button type="submit">Register!</button>
+                <li><label>Email: </label><input id="email" type="email" placeholder="Email ID" required></li>
+                <li><label>Password: </label><input id="password" type="password" required></li>
+                <button onclick="dr()">Register!</button>
             </ul>
-        </form>
+        
         <button onclick="fb()">Facebook Login</button>
     </body>
 </html>

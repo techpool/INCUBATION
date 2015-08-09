@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script>
+                   
+            var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
+                    
+            
+            users.orderByChild("registration_time").on("child_added", function(snapshot) {
+                console.log(snapshot.val());
+            });
+                    
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>
