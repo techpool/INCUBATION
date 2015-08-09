@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script>
+            var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
+            var authData = ref.getAuth();
+            if (authData) {
+                console.log("Authenticated user with uid:", authData.uid);
+            }
+            
+            var usersRef = ref.child("users");
+            usersRef.child(authData.uid).set({
+                date_of_birth: "June 23, 1912",
+                full_name: authData.facebook.email,
+                registration_time: Firebase.ServerValue.TIMESTAMP
+            });
+                        
+            var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
+                    
+            
+            users.orderByChild("registration_time").on("child_added", function(snapshot) {
+                console.log(snapshot.val());
+            });
+                    
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>

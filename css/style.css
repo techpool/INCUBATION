@@ -1,0 +1,17 @@
+label {
+    width: 140px;
+    display: inline-block;
+}
+
+li{
+    border-bottom: 1px solid #eee;
+    width: 370px;
+    list-style-type: none;
+    
+}
+
+form {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 15%;
+}
