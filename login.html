@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Login</title>
+        <link rel=stylesheet type="text/css" href="css/style.css">
+        <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script>
+            var ref = new Firebase("blistering-heat-273.firebaseio.com");
+            
+            //Redirection function to the profile page
+            function Redirect() {
+               window.location="profile.html";
+            }
+            
+            function dr(){
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                return general_login(email, password);
+
+            }
+            
+            function general_login(email, password){
+                 ref.authWithPassword({
+                                email    : email,
+                                password : password
+                            }, function(error, authData) {
+                                if (error) {
+                                    console.log("Login Failed!", error.message);
+                                    return false;
+                                } else {
+                                    console.log("Authenticated successfully with payload:", authData);
+                                    Redirect();
+                                }
+                            });
+            }
+        </script>
+    </head>
+    <body>
+        
+            <li><label>Email: </label><input id="email" type="email" placeholder="something@something.com" required></li>
+            <li><label>Password: </label><input id="password" type="password" required></li>
+            <button type="submit" onclick="dr()">Login</button>
+        </form>
+    </body>
+</html>
