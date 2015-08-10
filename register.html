@@ -3,12 +3,13 @@
         <title>INCUBATION | Registration</title>
         <link rel=stylesheet type="text/css" href="css/style.css">
         <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>
             var ref = new Firebase("blistering-heat-273.firebaseio.com");
             
             //Redirection function to the profile page
             function Redirect() {
-               window.location="/profile.html";
+               window.location="profile.html";
             }
             
             function general_login(email, password){
@@ -44,7 +45,10 @@
                         var usersRef = ref.child("users");
                         usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
                             //Initial time when the user is registered gets set.
-                            registration_time: Firebase.ServerValue.TIMESTAMP
+                            registration_time: Firebase.ServerValue.TIMESTAMP,
+                            user_name: document.getElementById('username').value,
+                            reg_year: document.getElementById('reg_year').value,
+                            department: $('input[name=dept]:checked').val()
                         });
                         general_login(email, password);
                     }
@@ -98,7 +102,19 @@
         
             <ul>
                 <li><label>Email: </label><input id="email" type="email" placeholder="Email ID" required></li>
+                <li><label>Username: </label><input id="username" type="text" placeholder="Username"></li>
+                <li><label>Registration Year: </label><input id="reg_year" type="number" max="2015" min="2008"></li>
+                <li><label>Department: </label>
+                    <input name="dept" type="radio" value="CSE" checked>CSE
+                    <input name="dept" type="radio" value="ME">ME
+                    <input name="dept" type="radio" value="CE">CE
+                    <input name="dept" type="radio" value="EE1">EE1
+                    <input name="dept" type="radio" value="EE2">EE2
+                    <input name="dept" type="radio" value="ECE1">ECE1
+                    <input name="dept" type="radio" value="ECE2">ECE2
+                </li>
                 <li><label>Password: </label><input id="password" type="password" required></li>
+                
                 <button onclick="dr()">Register!</button>
             </ul>
         
