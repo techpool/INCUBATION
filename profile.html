@@ -7,41 +7,80 @@
             
             //Function that redirects to the registration page
             function Redirect() {
-               window.location="register.html";
+               window.location="login.html";
+            }
+            
+            function redirect_update(){
+                window.location = "update.html";
             }
             
             //Reference variable for the primary database
             var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
-            var authData = ref.getAuth();
-            console.log(authData);
-            if (authData) {
-                
-                console.log("Authenticated user with uid:", authData.uid);
-                
-                //reference to the user collection which is the child of the primary database
-                var usersRef = ref.child("users");
-                if(authData.provider == "facebook"){
-                    var email = authData.facebook.email;
-                } else {
-                    var email = authData.password.email;
-                }
-                //Updates the already registered person with the necessary infos
-                usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
-                    //Last login time updated
-                    last_login_time: Firebase.ServerValue.TIMESTAMP
-                });
-                
-            } else {
-                
-                //Incase the user is not authorised or logged in and opens this page directly
-                //The user gets redirected to the register or login page.
-                Redirect();
-            }
             
+            var logincheck = function(){
+                var authData = ref.getAuth();
+                console.log(authData);
+                if (authData) {
+
+                    console.log("Authenticated user with uid:", authData.uid);
+
+                    //reference to the user collection which is the child of the primary database
+                    var usersRef = ref.child("users");
+                    if(authData.provider == "facebook"){
+                        email = authData.facebook.email;
+                    } else {
+                        email = authData.password.email;
+                    }
+                    //Updates the already registered person with the necessary infos
+                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                        //Last login time updated
+                        last_login_time: Firebase.ServerValue.TIMESTAMP
+                    });
+
+                } else {
+
+                    //Incase the user is not authorised or logged in and opens this page directly
+                    //The user gets redirected to the register or login page.
+                    Redirect();
+                }
+            };
+            
+            logincheck();
+            
+            
+            var dataPath = "https://blistering-heat-273.firebaseio.com/users/" + email.toLowerCase().replace(/\W+/g, "");
+            console.log(dataPath);
+            var userData = new Firebase(dataPath);
+            
+            
+            userData.once("value", function(snap) {
+                console.log("initial data loaded!", snap.val());
+                var para = document.createElement("span");
+                var username = document.createTextNode(snap.val().user_name + "!");
+                para.appendChild(username);
+                document.getElementById("welcome_message").appendChild(para);
+                
+                var dept = document.createTextNode(snap.val().department);
+                if(snap.val().department == undefined){
+                    redirect_update();
+                }
+                document.getElementById("department").appendChild(dept);
+                
+                var regyear = document.createTextNode(snap.val().reg_year);
+                document.getElementById("reg_year").appendChild(regyear);
+            });
+            
+            function logout(){
+                ref.unauth();
+                logincheck();
+            }
             
         </script>
     </head>
     <body>
-    
+        <div id="welcome_message">Hello </div>    
+        <div id="department">Department: </div>
+        <div id="reg_year">Registration Year: </div>
+        <button onclick="logout()">Logout</button>
     </body>
 </html>
