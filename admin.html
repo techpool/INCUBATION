@@ -5,11 +5,49 @@
         <script>
                    
             var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
-                    
+            var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
             
-            users.orderByChild("registration_time").on("child_added", function(snapshot) {
-                console.log(snapshot.val());
-            });
+            function Redirect() {
+               window.location="login.html";
+            }
+            
+            
+            var logincheck = function(){
+                var authData = ref.getAuth();
+                if (authData) {
+
+                    console.log("Authenticated user with uid:", authData.uid);
+
+                    //reference to the user collection which is the child of the primary database
+                    var usersRef = ref.child("users");
+                    if(authData.provider == "facebook"){
+                        email = authData.facebook.email;
+                    } else {
+                        email = authData.password.email;
+                    }
+                    
+                    if(email != 'suryadeep10@gmail.com'){
+                        Redirect();
+                    }
+                    
+
+                } else {
+
+                    //Incase the user is not authorised or logged in and opens this page directly
+                    //The user gets redirected to the register or login page.
+                    Redirect();
+                }
+            };
+            
+            
+            function retrieveData(){
+                logincheck();
+                users.orderByChild("registration_time").on("child_added", function(snapshot) {
+                    console.log(snapshot.val());
+                });
+            }
+            
+            retrieveData();
                     
         </script>
     </head>

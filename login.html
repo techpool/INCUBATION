@@ -52,6 +52,42 @@
                             });
             }
 
+
+            //Function for creating new user in the database
+            function userCreation_facebook(email, password){
+                ref.createUser({
+                    email    : email,
+                    password : password
+                    }, function(error, userData) {
+                    if (error) {
+                        console.log("Error creating user:", error);
+                        //Incase the user is already registered, the user is redirected to the profile page
+                        Redirect();
+                    } else {
+                        console.log("Successfully created user account with uid:", userData.uid);
+                        var usersRef = ref.child("users");
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
+                            //Initial time when the user is registered gets set.
+                            registration_time: Firebase.ServerValue.TIMESTAMP
+                        });
+                        Redirect();
+                    }
+                });
+            }
+            
+            function fb(){
+                ref.authWithOAuthPopup("facebook", function(error, authData) {
+                    if (error) {
+                        console.log("Login Failed!", error);
+                    } else {
+                        this.userData = authData;
+                        console.log("Authenticated successfully with payload:", authData);
+                        userCreation_facebook(authData.facebook.email, authData.facebook.accessToken);
+                    }
+                });
+            }
+
+
         </script>
     </head>
     
@@ -60,13 +96,17 @@
         
 
             <div class="container">
+
+            
                 <div class="form">
                     <div class="row">
                         <div class="col s12">
 
+                            <button class="waves-effect waves-light btn-large" id="facebook_button" onclick="fb()"></button>
+
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="email" type="email" class="validate">
+                                    <input id="email" type="email" class="validate" required>
                                     <label for="email" data-error="Hey!_That's_not_an_Email_ID!" data-success="Looks_Good!">Email</label>
                                 </div>
 
@@ -76,7 +116,7 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="password" type="password" class="validate">
+                                    <input id="password" type="password" class="validate" required>
                                     <label for="password">Password</label>
                                 </div>
                             </div>
