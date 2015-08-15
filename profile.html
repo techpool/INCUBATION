@@ -28,17 +28,25 @@
                     //reference to the user collection which is the child of the primary database
                     var usersRef = ref.child("users");
                     if(authData.provider == "facebook"){
+                        
                         email = authData.facebook.email;
-                        userName = authData.facebook.displayName;
+                        
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                            //Last login time updated
+                            last_login_time: Firebase.ServerValue.TIMESTAMP,
+                            user_name: authData.facebook.displayName
+                        });
                     } else {
+                        
                         email = authData.password.email;
+                        
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                            //Last login time updated
+                            last_login_time: Firebase.ServerValue.TIMESTAMP
+                        });
                     }
                     //Updates the already registered person with the necessary infos
-                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
-                        //Last login time updated
-                        last_login_time: Firebase.ServerValue.TIMESTAMP,
-                        user_name: userName
-                    });
+                    
 
                 } else {
 

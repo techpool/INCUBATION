@@ -1,8 +1,25 @@
 <html>
     <head>
         <title>Login</title>
-        <link rel=stylesheet type="text/css" href="css/style.css">
+        <link rel=stylesheet type="text/css" href="css/login_style.css">
+        
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
         <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+
+        <!-- Importing Bootstraps -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+
         <script>
             var ref = new Firebase("blistering-heat-273.firebaseio.com");
             
@@ -11,13 +28,17 @@
                window.location="profile.html";
             }
             
+
+
             function dr(){
+                //Retrieving the email and password from the webpage.
                 var email = document.getElementById("email").value;
                 var password = document.getElementById("password").value;
                 return general_login(email, password);
 
             }
             
+            //Function for loging into the Firebase Database
             function general_login(email, password){
                  ref.authWithPassword({
                                 email    : email,
@@ -25,20 +46,28 @@
                             }, function(error, authData) {
                                 if (error) {
                                     console.log("Login Failed!", error.message);
-                                    return false;
                                 } else {
                                     console.log("Authenticated successfully with payload:", authData);
                                     Redirect();
                                 }
                             });
             }
+
         </script>
     </head>
+    
+    
     <body>
         
-            <li><label>Email: </label><input id="email" type="email" placeholder="something@something.com" required></li>
-            <li><label>Password: </label><input id="password" type="password" required></li>
-            <button onclick="dr()">Login</button>
-        </form>
+       
+            <div class="form">
+                <li><label>Email: </label><input id="email" type="email" placeholder="something@something.com" required></li>
+                <li><label>Password: </label><input id="password" type="password" required></li>
+                <button onclick="dr()">Login</button>
+            </div>
+
+    
     </body>
+
+
 </html>

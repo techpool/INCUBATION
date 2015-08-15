@@ -22,9 +22,7 @@
                 if (authData) {
 
                     console.log("Authenticated user with uid:", authData.uid);
-
-                    //reference to the user collection which is the child of the primary database
-                    var usersRef = ref.child("users");
+                    
                     if(authData.provider == "facebook"){
                         email = authData.facebook.email;
                     } else {
@@ -41,15 +39,16 @@
             
             
             
-            var usersRef = ref.child("users");
+            var usersRef = new Firebase("https://blistering-heat-273.firebaseio.com/users");
             
             function setDetails(){
                     logincheck();
-                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).set({
+                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
                         reg_year: document.getElementById('reg_year').value,
                         department: $('input[name=dept]:checked').val(),
                         last_login_time: Firebase.ServerValue.TIMESTAMP
                     });
+                       
                     Redirect_profile();
             };
             
