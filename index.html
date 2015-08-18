@@ -1,32 +1,145 @@
+<!DOCTYPE html>
 <html>
+<head>
+	<title>I N C U B A T I O N</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        
 
-    <head>
-        <title>I N C U B A T I O N</title>
-        <link rel="stylesheet" type="text/css" href="css/test.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
         
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="script/typed.js"></script>
-        <script src="script/script.js"></script>
-        
-    </head>
-    <body>
-        
-        
-        <h1><div class="subheader"></div></h1>
-        
-        <div class="terminal">
-                <div class="terminalhead">
-                    <div class="redCircle"></div>
-                    <div class="yellowCircle"></div>
-                    <div class="greenCircle"></div>
-                    Desktop -- bash -- 80 x 24
-                </div>
-                <div class="terminalbody" >
-                    <h1><div class="header"></div></h1>
-                    <div class='element0'></div>
-        
-                </div>
-            </div>
-                
-    </body>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+    <script>
+    	$(document).ready(function(){
+      		$('.parallax').parallax();
+    	});
+
+    	$(document).ready(function(){
+    		$('.scrollspy').scrollSpy();
+  		});
+
+
+    </script>
+    
+	<script src="script/typed.js"></script>
+	<script>
+
+  		$(function(){
+      		$(".element").typed({
+        		strings: ["Ideate", "Innovate", "Create"],
+        		typeSpeed: 100,
+        		loop: true,
+        		showCursor: false,
+        		backSpeed: 40,
+            	// time before backspacing
+            	backDelay: 1500
+      		});
+  		});
+
+	</script>
+
+    
+	
+
+
+
+   <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<nav>
+    <div class="nav-wrapper">
+      	<a href="#!" class="brand-logo">Logo</a>
+      	<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      	<ul class="right hide-on-med-and-down">
+        	<li><a href="login.html">Login</a></li>
+        	<li><a href="register.html">Register</a></li>
+        	<li><a href=".html">Admin Login</a></li>
+      	</ul>
+      	<ul class="side-nav" id="mobile-demo">
+        	<li><a href="login.html">Login</a></li>
+        	<li><a href="register.html">Register</a></li>
+        	<li><a href=".html">Admin Login</a></li>
+      	</ul>
+    </div>
+  	</nav>
+
+
+
+
+
+  	<div class="parallax-container container1">
+    	<div class="parallax"><img src="http://udhao.net/wp-content/uploads/Silhouette-Man-at-Sunrise-Wallpaper.jpg"></div>
+    	<div class="main_heading">
+    		<div class="row">
+      			<div class="col s12">
+      				
+      					<h1 class="header center">INCUBATION</h1>
+      				
+      				
+      					<h1 class="header center element"></h1>
+      			</div>
+    		</div>
+    	</div> 
+  	</div>
+
+  	<div class="section1">
+    	
+  	</div>
+  	
+  	<div class="parallax-container container2">
+    	<div class="parallax"><img src="http://d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/night-club/profile.original.jpg"></div>
+
+    	<div class="row container">
+    		<div class="row">
+			    <div class="col s12 l5">
+			    	<img class="responsive-img" id="rocket_img"src="http://colouringbook.org/openclipart.org/2013/May/rocket_coloring_book_colouring-999px.png">
+			    </div>
+
+			    <div class="col l2">
+			    	<p></p>
+			    </div>
+
+			   	
+			    <div class="col s12 l5">
+			    <div class="non_p center">
+			    	<div class="row">
+			    		<h4><i class="fa fa-book fa-lg fa-fw"></i>Learn with us.</h4>
+			    	</div>
+			    	<div class="row">
+			    		<h4 class="1st_text"><i class="fa fa-cogs fa-lg fa-fw"></i>Create with us.</h4>
+			    	</div>
+			    	<div class="row">
+			    		<h4 class="1st_text"><i class="fa fa-rocket fa-lg fa-fw"></i>Grow with us.</h4>
+			    	</div>
+			    </div>
+			    </div>
+			    
+			    
+		  	</div>
+    	</div>
+  	</div>
+
+  	<div class="section2">
+    	
+  	</div>
+
+  	<div class="parallax-container container3">
+    	<div class="parallax"><img src="http://d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/night-club/events-bg.original.jpg"></div>
+    	<div class="main_heading">
+    		<div class="row">
+      			<div class="col s12">
+      				
+      			</div>
+    		</div>
+    	</div> 
+  	</div>
+</body>
 </html>

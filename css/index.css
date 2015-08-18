@@ -1,0 +1,49 @@
+.container1 {
+      height: 75vh;
+}
+
+.container2 {
+      height: auto;
+}
+      
+.header{
+	font-size: 5em;
+	padding-left: 30px;
+}
+
+.main_heading{
+	margin-top: 3%;
+}
+
+html{
+	font-family: 'HelveticaNeue-Thin', 'Helvetica Neue Light', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+.resposive-img{
+	height: 100%;
+}
+
+.section1{
+	background-color: #009587;
+	height: 3vh;
+}
+
+.section2{
+	background-color: #FF4081;
+	height: 3vh;
+}
+
+.non_p{
+	padding-top: 30%;
+	color: #fff;
+	line-height: 400%;
+	font-size: 200em;
+}
+
+.fa-fw{
+	width: 25%;
+}
+
+#rocket_img{
+	padding-top: 10%;
+}

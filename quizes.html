@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="css/profile.css">
+
+        <script>
+            
+            
+            //Function that redirects to the registration page
+            function Redirect() {
+               window.location="login.html";
+            }
+            
+            function redirect_update(){
+                window.location = "update.html";
+            }
+            
+            //Reference variable for the primary database
+            var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
+            
+            var logincheck = function(){
+                var authData = ref.getAuth();
+                console.log(authData);
+                if (authData) {
+
+                    console.log("Authenticated user with uid:", authData.uid);
+                    console.log(authData);
+
+                    //reference to the user collection which is the child of the primary database
+                    var usersRef = ref.child("users");
+                    if(authData.provider == "facebook"){
+                        
+                        email = authData.facebook.email;
+                        profile_pic = authData.facebook.profileImageURL;
+                        
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                            //Last login time updated
+                            last_login_time: Firebase.ServerValue.TIMESTAMP,
+                            user_name: authData.facebook.displayName
+                        });
+                    } else {
+                        
+                        email = authData.password.email;
+                        
+                        usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                            //Last login time updated
+                            last_login_time: Firebase.ServerValue.TIMESTAMP
+                        });
+                    }
+                    //Updates the already registered person with the necessary infos
+                    
+
+                } else {
+
+                    //Incase the user is not authorised or logged in and opens this page directly
+                    //The user gets redirected to the register or login page.
+                    Redirect();
+                }
+            };
+            
+            logincheck();
+            
+            
+            var dataPath = "https://blistering-heat-273.firebaseio.com/users/" + email.toLowerCase().replace(/\W+/g, "");
+            console.log(dataPath);
+            var userData = new Firebase(dataPath);
+            
+            
+            userData.once("value", function(snap) {
+                console.log("initial data loaded!", snap.val());
+                var para = document.createElement("span");
+                var username = document.createTextNode(snap.val().user_name + "!");
+                para.appendChild(username);
+                document.getElementById("welcome_message").appendChild(para);
+                
+                var dept = document.createTextNode(snap.val().department);
+                if(snap.val().wbut_roll == undefined){
+                    redirect_update();
+                }
+                document.getElementById("department").appendChild(dept);
+                
+                var regyear = document.createTextNode(snap.val().reg_year);
+                document.getElementById("reg_year").appendChild(regyear);
+
+                var wbroll = document.createTextNode(snap.val().wbut_roll);
+                document.getElementById("wbut_roll").appendChild(wbroll);
+
+                document.getElementById("profile_pic").src = profile_pic;
+            });
+            
+            function logout(){
+                ref.unauth();
+                logincheck();
+            }
+
+
+            $( document ).ready(function(){
+                $(".button-collapse").sideNav();
+                $('.collapsible').collapsible();
+            });
+
+
+            // Get a reference to our posts
+            var quiz_ref = new Firebase("https://blistering-heat-273.firebaseio.com/events/quizes");
+
+            // Retrieve new posts as they are added to our database
+            quiz_ref.on("child_added", function(snapshot, prevChildKey) {
+                var newEvent = snapshot.val();
+                card_creator(newEvent.title, newEvent.details, newEvent.image_url, newEvent.schedule);
+            });
+
+            function card_creator(title, details, image_url, schedule){
+                var newElement = document.createElement('div');
+                newElement.innerHTML = "\
+                <div class='card large' id='event_card'> \
+                    <div class='card-image waves-effect waves-block waves-light'> \
+                        <img class='activator' src=" + image_url + "> \
+                    </div> \
+                    <div class='card-content'> \
+                        <span class='card-title activator grey-text text-darken-4'>"+ title +"<i class='material-icons right'>more_vert</i></span> \
+                        <p>"+ schedule +"</p> \
+                    </div> \
+                    <div class='card-reveal' id='card_reveal'> \
+                        <span class='card-title grey-text text-darken-4'>"+ title +"<i class='material-icons right'>close</i></span> \
+                            <div class='row' id='details_section'> \
+                                <div class='col s6' id='details'> \
+                                    <h5>About</h5> <p>" + details + "\
+                                </p> </div> \
+                                <div class='col s6' id='schedule'> \
+                                    <h5>Schedule</h5> <p>" + schedule + "\
+                                </p> </div> \
+                            </div> \
+                    </div> \
+                </div>";
+                document.getElementById("events_section").appendChild(newElement);
+            }
+
+            
+
+        </script>
+    </head>
+    <body>
+
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="profile.html">Home</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li class="active"><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><a href="profile.html">Home</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li class="active"><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+        <div class="row">
+            <div class="col s3">
+                <!-- Grey navigation panel -->
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" id="profile_pic" src="images/office.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                        <i class="material-icons right">more_vert</i></span>
+                        <div id="welcome_message">Hello </div>
+                    </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    <div id="department">Department: </div>
+                    <div id="reg_year">Registration Year: </div>
+                    <div id="wbut_roll">WBUT ROLL No.: </div>
+                </div>
+                    <button class="waves-effect waves-red btn-large" onclick="logout()">Logout</button>
+                </div>
+            </div>
+            <div class="col s9" id="events_section">
+                <!-- Teal page content  -->
+                  
+            </div>
+        </div>
+
+    </body>
+</html>

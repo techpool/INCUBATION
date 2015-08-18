@@ -2,10 +2,25 @@
     <head>
         <title>Profile</title>
         <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/admin.css">
+
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
         <script>
                    
             var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
             var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
+            var event_ref = new Firebase("https://blistering-heat-273.firebaseio.com/events");
             
             function Redirect() {
                window.location="login.html";
@@ -44,14 +59,712 @@
                 logincheck();
                 users.orderByChild("registration_time").on("child_added", function(snapshot) {
                     console.log(snapshot.val());
+                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name);
                 });
+            }
+
+
+            function updateTable(wbut_roll, user_name, email) {
+                var table = document.getElementById("CSE_1st");
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = wbut_roll;
+                cell2.innerHTML = user_name;
             }
             
             retrieveData();
+
+            function work_create(){
+                var title = document.getElementById("title_workshop").value;
+                var details = document.getElementById("details_workshop").value;
+                var prerequisites = document.getElementById("prerequisites_workshop").value;
+                var schedule = document.getElementById("schedule_workshop").value;
+                var image_url = document.getElementById("image_url_workshop").value;
+
+                var postsRef = event_ref.child("workshops");
+                postsRef.push({
+                    title: title,
+                    details: details,
+                    prerequisites: prerequisites,
+                    schedule: schedule,
+                    image_url: image_url
+                });
+            }
+
+            function quiz_create(){
+                var title = document.getElementById("title_quiz").value;
+                var details = document.getElementById("details_quiz").value;
+                var schedule = document.getElementById("schedule_quiz").value;
+                var image_url = document.getElementById("image_url_quiz").value;
+
+                var postsRef = event_ref.child("quizes");
+                postsRef.push({
+                    title: title,
+                    details: details,
+                    schedule: schedule,
+                    image_url: image_url
+                });
+            }
+
+            function event_create(){
+                var title = document.getElementById("title_event").value;
+                var details = document.getElementById("details_event").value;
+                var schedule = document.getElementById("schedule_event").value;
+                var image_url = document.getElementById("image_url_event").value;
+
+                var postsRef = event_ref.child("other_events");
+                postsRef.push({
+                    title: title,
+                    details: details,
+                    schedule: schedule,
+                    image_url: image_url
+                });
+            }
                     
         </script>
     </head>
     <body>
+
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li class="active"><a href="admin.html">Admin Page</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+
+                    <ul class="side-nav" id="mobile-demo">
+                        <li class="active"><a href="admin.html">Admin Page</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Create Workshop</div>
+                            <div class="collapsible-body">
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="title_workshop" type="text" class="validate">
+                                        <label for="title_workshop">Title of Workshop</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="image_url_workshop" type="text" class="validate">
+                                        <label for="image_url_workshop">URL for cover art</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="details_workshop" type="text" class="validate">
+                                        <label for="details_workshop">Details</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="prerequisites_workshop" type="text" class="validate">
+                                        <label for="prerequisites_workshop">Prerequisites</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="schedule_workshop" type="text" class="validate">
+                                        <label for="schedule_workshop">Schedule</label>
+                                    </div>
+                                </div>
+                                <button class="waves-effect waves-light btn-large" id="submit_event" onclick="work_create()">Submit</button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">place</i>Create Quiz</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="title_quiz" type="text" class="validate">
+                                        <label for="title_quiz">Title of Quiz</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="image_url_quiz" type="text" class="validate">
+                                        <label for="image_url_quiz">URL for cover art</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="details_quiz" type="text" class="validate">
+                                        <label for="details_quiz">Details</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="schedule_quiz" type="text" class="validate">
+                                        <label for="schedule_quiz">Schedule</label>
+                                    </div>
+                                </div>
+                                <button class="waves-effect waves-light btn-large" id="submit_event" onclick="quiz_create()">Submit</button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Create Events</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="title_event" type="text" class="validate">
+                                        <label for="title_event">Title of Event</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="image_url_event" type="text" class="validate">
+                                        <label for="image_url_event">URL for cover art</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="details_event" type="text" class="validate">
+                                        <label for="details_event">Details</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="schedule_event" type="text" class="validate">
+                                        <label for="schedule_event">Schedule</label>
+                                    </div>
+                                </div>
+
+                                <button class="waves-effect waves-light btn-large" id="submit_event" onclick="event_create()">Submit</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 l6">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>CSE</div>
+                            <div class="collapsible-body">
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#CSE1">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#CSE2">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#CSE3">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#CSE4">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="CSE1" class="col s12">
+                                        <table class="hoverable" id="CSE_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CSE2" class="col s12">
+                                        <table class="hoverable" id="CSE_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CSE3" class="col s12">
+                                        <table class="hoverable" id="CSE_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CSE4" class="col s12">
+                                        <table class="hoverable" id="CSE_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">place</i>ECE 1</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#ECE11">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE12">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE13">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE14">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="ECE11" class="col s12">
+                                        <table class="hoverable" id="ECE1_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE12" class="col s12">
+                                        <table class="hoverable" id="ECE1_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE13" class="col s12">
+                                        <table class="hoverable" id="ECE1_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE14" class="col s12">
+                                        <table class="hoverable" id="ECE1_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>ECE 2</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#ECE21">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE22">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE23">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#ECE24">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="ECE21" class="col s12">
+                                        <table class="hoverable" id="ECE2_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE22" class="col s12">
+                                        <table class="hoverable" id="ECE2_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE23" class="col s12">
+                                        <table class="hoverable" id="ECE2_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ECE24" class="col s12">
+                                        <table class="hoverable" id="ECE2_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>EE 1</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#EE11">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#EE12">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#EE13">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#EE14">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="EE11" class="col s12">
+                                        <table class="hoverable" id="EE1_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE12" class="col s12">
+                                        <table class="hoverable" id="EE1_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE13" class="col s12">
+                                        <table class="hoverable" id="EE1_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE14" class="col s12">
+                                        <table class="hoverable" id="EE1_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>EE 2</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a  class="active" href="#EE21">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#EE22">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#EE23">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#EE24">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="EE21" class="col s12">
+                                    <table class="hoverable" id="EE2_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE22" class="col s12">
+                                        <table class="hoverable" id="EE2_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE23" class="col s12">
+                                        <table class="hoverable" id="EE2_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="EE24" class="col s12">
+                                        <table class="hoverable" id="EE2_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>ME</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#ME1">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#ME2">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#ME3">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#ME4">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="ME1" class="col s12">
+                                        <table class="hoverable" id="ME_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ME2" class="col s12">
+                                        <table class="hoverable" id="ME_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ME3" class="col s12">
+                                        <table class="hoverable" id="ME_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ME4" class="col s12">
+                                        <table class="hoverable" id="ME_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>CE</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#CE1">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#CE2">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#CE3">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#CE4">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="CE1" class="col s12">
+                                    <table class="hoverable" id="CE_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CE2" class="col s12">
+                                    <table class="hoverable" id="CE_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CE3" class="col s12">
+                                    <table class="hoverable" id="CE_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CE4" class="col s12">
+                                    <table class="hoverable" id="CE_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
     
     </body>
 </html>

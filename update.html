@@ -46,6 +46,7 @@
                     usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
                         reg_year: document.getElementById('reg_year').value,
                         department: $('input[name=dept]:checked').val(),
+                        wbut_roll: document.getElementById('wbut_roll').value,
                         last_login_time: Firebase.ServerValue.TIMESTAMP
                     });
                        
@@ -65,6 +66,7 @@
             <input name="dept" type="radio" value="ECE1">ECE1
             <input name="dept" type="radio" value="ECE2">ECE2
         </li>
+        <li><label>WBUT Roll No.: </label><input id="wbut_roll" type="number"></li>
         <button onclick="setDetails()">Update</button>
     </body>
 </html>

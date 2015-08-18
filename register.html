@@ -62,6 +62,7 @@
                             registration_time: Firebase.ServerValue.TIMESTAMP,
                             user_name: document.getElementById('username').value,
                             reg_year: document.getElementById('reg_year').value,
+                            wbut_roll: document.getElementById('wbut_roll').value,
                             department: $('input[name=dept]:checked').val()
                         });
                         general_login(email, password);
@@ -142,6 +143,10 @@
 
                 
                     <div class="row">
+                    <div class="col s2">
+                    <p>Department:</p>
+                    </div>
+                    <div class="input-field col s10">
                         <p>
                             <input name="dept" type="radio" id="CSE" value="CSE" />
                             <label for="CSE">CSE</label>
@@ -171,8 +176,16 @@
                             <label for="ECE2">ECE2</label>
                         </p>
                     </div>
-                
+                    </div>
 
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="wbut_roll" type="number" class="validate" required>
+                        <label for="wbut_roll">WBUT Roll</label>
+                    </div>
+                </div>
+
+                
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="password" type="password" class="validate" required>
@@ -180,9 +193,18 @@
                     </div>
                 </div>
                 
-            <button class="waves-effect waves-light btn-large" onclick="dr()">Register</button>
-            
 
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="waves-effect waves-light btn-large" id="register_button" onclick="dr()">Register</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <a href="login.html"><button class="waves-effect waves-light btn-large" id="login_button" onclick="">Already Registered? Login!</button></a>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

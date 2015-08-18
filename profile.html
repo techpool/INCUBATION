@@ -2,6 +2,22 @@
     <head>
         <title>Profile</title>
         <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="css/profile.css">
+
         <script>
             
             
@@ -30,6 +46,7 @@
                     if(authData.provider == "facebook"){
                         
                         email = authData.facebook.email;
+                        profile_pic = authData.facebook.profileImageURL;
                         
                         usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
                             //Last login time updated
@@ -72,26 +89,80 @@
                 document.getElementById("welcome_message").appendChild(para);
                 
                 var dept = document.createTextNode(snap.val().department);
-                if(snap.val().department == undefined){
+                if(snap.val().wbut_roll == undefined){
                     redirect_update();
                 }
                 document.getElementById("department").appendChild(dept);
                 
                 var regyear = document.createTextNode(snap.val().reg_year);
                 document.getElementById("reg_year").appendChild(regyear);
+
+                var wbroll = document.createTextNode(snap.val().wbut_roll);
+                document.getElementById("wbut_roll").appendChild(wbroll);
+
+                document.getElementById("profile_pic").src = profile_pic;
             });
             
             function logout(){
                 ref.unauth();
                 logincheck();
             }
-            
+
+            $( document ).ready(function(){
+                $(".button-collapse").sideNav();
+            })
+
         </script>
     </head>
     <body>
-        <div id="welcome_message">Hello </div>    
-        <div id="department">Department: </div>
-        <div id="reg_year">Registration Year: </div>
-        <button onclick="logout()">Logout</button>
+
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Logo</a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="profile.html">Home</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+
+                    <ul class="side-nav" id="mobile-demo">
+                        <li><a href="profile.html">Home</a></li>
+                        <li><a href="workshops.html">Workshops</a></li>
+                        <li><a href="quizes.html">Quizes</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+        <div class="row">
+            <div class="col s4">
+                <!-- Grey navigation panel -->
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" id="profile_pic" src="images/office.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">
+                        <i class="material-icons right">more_vert</i></span>
+                        <div id="welcome_message">Hello </div>
+                    </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                    <div id="department">Department: </div>
+                    <div id="reg_year">Registration Year: </div>
+                    <div id="wbut_roll">WBUT ROLL No.: </div>
+                </div>
+                <button class="waves-effect waves-red btn-large" onclick="logout()">Logout</button>
+            </div>
+            <div class="col s8">
+            <!-- Teal page content  -->
+            
+            </div>
+        </div>
     </body>
 </html>

@@ -1,7 +1,9 @@
 body {
-	background-image: url(../images/teal-pentagonal-background.jpg);
+	/*background-image: url(../images/teal-pentagonal-background.jpg);*/
+	background: linear-gradient(to bottom,#ff8f00 0%,#ff6f00 100%);
 	background-size: cover;
 	background-position: center center;
+	font-weight: thin;
 }
 
 .form{
@@ -11,7 +13,7 @@ body {
 	-webkit-box-shadow: 0px 0px 64px -13px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 64px -13px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 64px -13px rgba(0,0,0,0.75);
-	margin-bottom: 15%;
+	margin-bottom: 12%;
 }
 
 #facebook_button{
@@ -22,5 +24,20 @@ body {
 	background-position: center;
 	width: 100%;
 	margin-bottom: 10px;
+	height: 8vh;
 }
 
+#login_button{
+	background: linear-gradient(to bottom,#ff8f00 0%,#ff6f00 100%);
+	width: 100%;
+}
+
+#frgt_button{
+	background: linear-gradient(to bottom,#ff8f00 0%,#ff6f00 100%);
+	width: 100%;
+}
+
+#register_button{
+	background: linear-gradient(to bottom,#ff8f00 0%,#ff6f00 100%);
+	width: 100%;
+}
