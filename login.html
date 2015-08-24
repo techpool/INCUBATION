@@ -84,6 +84,8 @@
                         console.log("Authenticated successfully with payload:", authData);
                         userCreation_facebook(authData.facebook.email, authData.facebook.accessToken);
                     }
+                }, {
+                    scope:"email"
                 });
             }
 
