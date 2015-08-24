@@ -20,10 +20,10 @@
 
         <script>
             var ref = new Firebase("blistering-heat-273.firebaseio.com");
-            
+
             //Redirection function to the profile page
             function Redirect() {
-               window.location="profile.html";
+               window.location.href ="profile.html";
             }
             
             function general_login(email, password){
@@ -40,7 +40,7 @@
                             });
             }
             
-            function userCreation_normal(email, password){
+            function userCreation_normal(email, password, sectionName){
                 ref.createUser({
                     email    : email,
                     password : password
@@ -63,7 +63,8 @@
                             user_name: document.getElementById('username').value,
                             reg_year: document.getElementById('reg_year').value,
                             wbut_roll: document.getElementById('wbut_roll').value,
-                            department: $('input[name=dept]:checked').val()
+                            department: $('input[name=dept]:checked').val(),
+                            section: sectionName
                         });
                         general_login(email, password);
                     }
@@ -107,9 +108,48 @@
             function dr(){
                 var email = document.getElementById("email").value;
                 var password = document.getElementById("password").value;
-                userCreation_normal(email, password);
+                userCreation_normal(email, password, sectionName);
 
-            }       
+            }
+
+            
+
+            function deptset(){
+                sectionSelect();
+                if(document.getElementById('secSelect').checked) {
+                    document.getElementById("CSE").disabled = false;
+                    document.getElementById("EE1").disabled = false;
+                    document.getElementById("EE2").disabled = false;
+                    document.getElementById("ECE1").disabled = false;
+                    document.getElementById("ECE2").disabled = false;
+                    document.getElementById("AEIE").disabled = false;
+                } else {
+                    document.getElementById("CSE").disabled = true;
+                    document.getElementById("EE1").disabled = true;
+                    document.getElementById("EE2").disabled = true;
+                    document.getElementById("ECE1").disabled = true;
+                    document.getElementById("ECE2").disabled = true;
+                    document.getElementById("AEIE").disabled = true;
+                }                
+            }
+
+            /*(function initialise(){
+                document.getElementById("secSelect").checked = true;
+            })();
+            */
+
+            $( document ).ready(function(){
+                deptset();
+            })
+            
+
+            function sectionSelect(){
+                if(document.getElementById('secSelect').checked) {
+                    sectionName = "B. Tech";
+                } else {
+                    sectionName = "Diploma";
+                }
+            }        
             
         </script>
     </head>
@@ -142,8 +182,20 @@
                 </div>
 
                 
-                    <div class="row">
+                <div class="switch">
+                    <p>Section:</p>
+                    <label>
+                        Diploma
+                        <input type="checkbox" id="secSelect" onclick="deptset()" >
+                        <span class="lever"></span>
+                        B. Tech
+                    </label>
+                </div>
+                
+                <div class="row">
+                    
                     <div class="col s2">
+
                     <p>Department:</p>
                     </div>
                     <div class="input-field col s10">
@@ -174,6 +226,10 @@
                         <p>
                             <input name="dept" type="radio" id="ECE2" value="ECE2" />
                             <label for="ECE2">ECE2</label>
+                        </p>
+                        <p>
+                            <input name="dept" type="radio" id="AEIE" value="AEIE" />
+                            <label for="AEIE">AEIE</label>
                         </p>
                     </div>
                     </div>
