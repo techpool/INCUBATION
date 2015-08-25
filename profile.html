@@ -51,7 +51,8 @@
                         usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
                             //Last login time updated
                             last_login_time: Firebase.ServerValue.TIMESTAMP,
-                            user_name: authData.facebook.displayName
+                            user_name: authData.facebook.displayName,
+                            email: email
                         });
                     } else {
                         
@@ -59,7 +60,8 @@
                         
                         usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
                             //Last login time updated
-                            last_login_time: Firebase.ServerValue.TIMESTAMP
+                            last_login_time: Firebase.ServerValue.TIMESTAMP,
+                            email:email
                         });
                     }
                     //Updates the already registered person with the necessary infos

@@ -58,14 +58,110 @@
             function retrieveData(){
                 logincheck();
                 users.orderByChild("registration_time").on("child_added", function(snapshot) {
-                    console.log(snapshot.val());
-                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name);
+                    console.log(snapshot.val().department);
+                    var temp = snapshot.val().department;
+                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year);
+
                 });
             }
 
+            
 
-            function updateTable(wbut_roll, user_name, email) {
-                var table = document.getElementById("CSE_1st");
+            function updateTable(wbut_roll, user_name, dept, reg_year) {
+                console.log(dept);
+                console.log(wbut_roll);
+                console.log(user_name);
+
+                if(dept == "CSE"){
+                    alert("im here")
+                    if (reg_year == "2015"){
+                        table = document.getElementById("CSE_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("CSE_2nd");
+                    } else if (reg_year == "2013") {
+                        alert("Hello");
+                        table = document.getElementById("CSE_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("CSE_4th");
+                    }
+                    
+                } else if (dept == "ME"){
+                    if(reg_year == "2015") {
+                        table = document.getElementById("ME_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("ME_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("ME_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("ME_4th");
+                    }
+
+                } else if (dept == "CE"){
+                    if (reg_year == "2015") {
+                        table = document.getElementById("CE_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("CE_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("CE_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("CE_4th");
+                    } 
+
+                } else if (dept == "ECE1"){
+                    if (reg_year == "2015") {
+                        table = document.getElementById("ECE1_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("ECE1_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("ECE1_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("ECE1_4th");
+                    }
+
+                } else if (dept == "ECE2"){
+                    if (reg_year == "2015") {
+                        table = document.getElementById("ECE2_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("ECE2_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("ECE2_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("ECE2_4th");
+                    }
+
+                } else if (dept == "EE1"){
+                    if (reg_year == "2015") {
+                        table = document.getElementById("EE1_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("EE1_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("EE1_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("EE1_4th");
+                    } 
+
+                } else if (dept == "EE2"){
+                    if (reg_year == "2015") {
+                        table = document.getElementById("EE2_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("EE2_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("EE2_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("EE2_4th");
+                    }
+                    
+                } else if (dept == "AEIE"){
+                    if(reg_year == "2015") {
+                        table = document.getElementById("AEIE_1st");
+                    } else if (reg_year == "2014") {
+                        table = document.getElementById("AEIE_2nd");
+                    } else if (reg_year == "2013") {
+                        table = document.getElementById("AEIE_3rd");
+                    } else if (reg_year == "2012") {
+                        table = document.getElementById("AEIE_4th");
+                    };
+                }
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
@@ -73,7 +169,10 @@
                 cell2.innerHTML = user_name;
             }
             
-            retrieveData();
+            $( document ).ready(function(){
+                retrieveData();
+            })
+            
 
             function work_create(){
                 var title = document.getElementById("title_workshop").value;
@@ -747,6 +846,77 @@
                                     </div>
                                     <div id="CE4" class="col s12">
                                     <table class="hoverable" id="CE_4th">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>AEIE</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#AEIE1">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#AEIE2">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#AEIE3">3rd Year</a></li>
+                                            <li class="tab col s3"><a href="#AEIE4">4th Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="AEIE1" class="col s12">
+                                    <table class="hoverable" id="AEIE_1st">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="AEIE2" class="col s12">
+                                    <table class="hoverable" id="AEIE_2nd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="AEIE3" class="col s12">
+                                    <table class="hoverable" id="AEIE_3rd">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="AEIE4" class="col s12">
+                                    <table class="hoverable" id="AEIE_4th">
                                             <thead>
                                                 <tr>
                                                     <th data-field="id">WBUT ROLL</th>
