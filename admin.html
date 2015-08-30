@@ -21,6 +21,7 @@
             var users = new Firebase("https://blistering-heat-273.firebaseio.com/users");
             var ref = new Firebase("https://blistering-heat-273.firebaseio.com");
             var event_ref = new Firebase("https://blistering-heat-273.firebaseio.com/events");
+            var usersSTADMIN = new Firebase("https://blistering-heat-273.firebaseio.com/usersSTADMIN");
             
             function Redirect() {
                window.location="login.html";
@@ -73,13 +74,11 @@
                 console.log(user_name);
 
                 if(dept == "CSE"){
-                    alert("im here")
                     if (reg_year == "2015"){
                         table = document.getElementById("CSE_1st");
                     } else if (reg_year == "2014") {
                         table = document.getElementById("CSE_2nd");
                     } else if (reg_year == "2013") {
-                        alert("Hello");
                         table = document.getElementById("CSE_3rd");
                     } else if (reg_year == "2012") {
                         table = document.getElementById("CSE_4th");
@@ -219,6 +218,17 @@
                     schedule: schedule,
                     image_url: image_url
                 });
+            }
+
+            function student_transfer(){
+                users.on("value", function(snapshot) {
+                    usersSTADMIN.set(snapshot.val());
+                });
+
+            }
+
+            function student_delete(){
+                usersSTADMIN.set("");
             }
                     
         </script>
@@ -933,8 +943,11 @@
                             </div>
                         </li>
                     </ul>
+
+                    <button class="waves-effect waves-light btn-large" onclick="student_transfer()">Post to the student's admin page</button><hr>
+                    <button class="waves-effect waves-light btn-large" onclick="student_delete()">Revoke from students</button>
                 </div>
-            </div>
+
     
     </body>
 </html>
