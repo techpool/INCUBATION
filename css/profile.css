@@ -37,3 +37,41 @@
 	box-shadow: 0px 0px 58px -8px rgba(0,0,0,0.75);
 	overflow: hidden;
 }
+
+.user_panel{
+	
+	height: 90vh;
+	margin-left: 0px;
+	background-attachment: fixed;
+}
+
+body{
+	margin: 0px;
+	background-image: url(http://www.wallpapersbyte.com/wp-content/uploads/2015/07/Angular-Shapes-Line-Points-squares-WallpapersByte-com-1366x768.jpg);
+	background-size: cover;
+}
+
+.image{
+	margin: auto;
+    width: 10%;
+    padding-top: 20px;
+}
+
+#welcome_message{
+	margin: auto;
+    width: 50%;
+    padding-top: 20px;
+    font-size: 300%;
+}
+
+.collapsible-body{
+	margin: auto;
+	width: 50%;
+	color: #fff;
+	font-size: 300%;
+}
+
+.user_details{
+	margin: auto;
+	width: 50%;
+}

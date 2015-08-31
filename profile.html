@@ -82,15 +82,16 @@
             console.log(dataPath);
             var userData = new Firebase(dataPath);
             
-            
             userData.once("value", function(snap) {
                 console.log("initial data loaded!", snap.val());
+                
                 var para = document.createElement("span");
                 var username = document.createTextNode(snap.val().user_name + "!");
                 para.appendChild(username);
                 document.getElementById("welcome_message").appendChild(para);
                 
                 var dept = document.createTextNode(snap.val().department);
+                
                 if(snap.val().wbut_roll == undefined){
                     redirect_update();
                 }
@@ -102,48 +103,34 @@
                 var wbroll = document.createTextNode(snap.val().wbut_roll);
                 document.getElementById("wbut_roll").appendChild(wbroll);
 
+                var section = document.createTextNode(snap.val().section);
+                document.getElementById("section").appendChild(section);
+                
+
                 document.getElementById("profile_pic").src = profile_pic;
             });
+            
             
             function logout(){
                 ref.unauth();
                 logincheck();
             }
 
-            $( document ).ready(function(){
+            $(document).ready(function(){
                 $(".button-collapse").sideNav();
+
+
             })
 
         </script>
     </head>
     <body>
 
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Logo</a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="profile.html">Home</a></li>
-                        <li><a href="workshops.html">Workshops</a></li>
-                        <li><a href="quizes.html">Quizes</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="feedback.html">Feedback</a></li>
-                    </ul>
-
-                    <ul class="side-nav" id="mobile-demo">
-                        <li><a href="profile.html">Home</a></li>
-                        <li><a href="workshops.html">Workshops</a></li>
-                        <li><a href="quizes.html">Quizes</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="feedback.html">Feedback</a></li>
-                    </ul>
-                </div>
-            </nav>
-
-
+            
+            <!--
         <div class="row">
             <div class="col s4">
-                <!-- Grey navigation panel -->
+                Grey navigation panel 
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" id="profile_pic" src="images/office.jpg">
@@ -162,9 +149,66 @@
                 <button class="waves-effect waves-red btn-large" onclick="logout()">Logout</button>
             </div>
             <div class="col s8">
-            <!-- Teal page content  -->
-            
+             Teal page content  
+              
             </div>
         </div>
+          -->
+            
+                    <nav class="transparent">
+                    <div class="nav-wrapper ">
+                        <a href="#" class="brand-logo">Logo</a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a href="profile.html">Home</a></li>
+                            <li><a href="workshops.html">Workshops</a></li>
+                            <li><a href="quizes.html">Quizes</a></li>
+                            <li><a href="events.html">Events</a></li>
+                        </ul>
+
+                        <ul class="side-nav" id="mobile-demo">
+                            <li><a href="profile.html">Home</a></li>
+                            <li><a href="workshops.html">Workshops</a></li>
+                            <li><a href="quizes.html">Quizes</a></li>
+                            <li><a href="events.html">Events</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            <div class="col s12 image">
+                <img src="" alt="" id="profile_pic" class="circle responsive-img"> <!-- notice the "circle" class -->
+                
+            </div>
+            <div class="col s12">
+                <p id="welcome_message">Welcome </p>
+            </div>
+            <div class="col s12">
+            <div class="user_details">
+             <ul class="collapsible popout" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>User Name</div>
+                    <div class="collapsible-body"><p></p></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">place</i>Registration Year</div>
+                    <div class="collapsible-body"><p id="reg_year"></p></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Department</div>
+                    <div class="collapsible-body"><p id="department"></p></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>WBUT Roll</div>
+                    <div class="collapsible-body"><p id="wbut_roll"></p></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Section</div>
+                    <div class="collapsible-body"><p id="section"></p></div>
+                </li>
+              </ul>
+            </div>
+        </div>
+        
+
+
     </body>
 </html>
