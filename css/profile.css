@@ -49,6 +49,7 @@ body{
 	margin: 0px;
 	background-image: url(http://www.wallpapersbyte.com/wp-content/uploads/2015/07/Angular-Shapes-Line-Points-squares-WallpapersByte-com-1366x768.jpg);
 	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .image{
@@ -59,14 +60,14 @@ body{
 
 #welcome_message{
 	margin: auto;
-    width: 50%;
+    width: 40%;
     padding-top: 20px;
     font-size: 300%;
 }
 
 .collapsible-body{
 	margin: auto;
-	width: 50%;
+	width: 40%;
 	color: #fff;
 	font-size: 300%;
 }
@@ -80,4 +81,9 @@ body{
 	position: fixed;
 	margin: 0px;
 	bottom: 0;
+}
+
+#profile_pic_nav{
+	padding: 10px;
+	height: 90%;	
 }
