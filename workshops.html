@@ -123,10 +123,10 @@
             // Retrieve new posts as they are added to our database
             workshop_ref.on("child_added", function(snapshot, prevChildKey) {
                 var newEvent = snapshot.val();
-                card_creator(newEvent.title, newEvent.details, newEvent.image_url, newEvent.prerequisites, newEvent.schedule);
+                card_creator(newEvent.title, newEvent.details, newEvent.image_url, newEvent.prerequisites, newEvent.schedule, newEvent.section);
             });
 
-            function card_creator(title, details, image_url, prerequisites, schedule){
+            function card_creator(title, details, image_url, prerequisites, schedule, section){
                 var newElement = document.createElement('div');
                 newElement.innerHTML = "\
                 <div class='card medium' id='event_card'> \
@@ -134,16 +134,16 @@
                         <img class='activator' src=" + image_url + "> \
                     </div> \
                     <div class='card-content'> \
-                        <span class='card-title activator grey-text text-darken-4'>"+ title +"<i class='material-icons right'>more_vert</i></span> \
-                        <p>"+ schedule +"</p> \
+                        <span class='card-title activator grey-text text-darken-4'><h3>"+ title +"</h3><i class='material-icons right'>more_vert</i></span> \
+                        <h5>"+ schedule +"</h5> \
                     </div> \
                     <div class='card-reveal' id='card_reveal'> \
                         <span class='card-title grey-text text-darken-4'>"+ title +"<i class='material-icons right'>close</i></span> \
                             <div class='row' id='details_section'> \
-                                <div class='col s6' id='details'> \
+                                <div class='col s5' id='details'> \
                                     <h5>About</h5> <p>" + details + "\
                                 </p> </div> \
-                                <div class='col s3' id='prerequisites'> \
+                                <div class='col s4' id='prerequisites'> \
                                     <h5>Prerequisites</h5> <ul>" + prerequisites + "\
                                 </ul> </div> \
                                 <div class='col s3' id='schedule'> \
@@ -152,7 +152,8 @@
                             </div> \
                     </div> \
                 </div>";
-                document.getElementById("events_section").appendChild(newElement);
+                console.log(section);
+                document.getElementById(section).appendChild(newElement);
             }
 
             
@@ -184,18 +185,27 @@
 
 
         <div class="row">
+            
+            <div class="col s12" id="workshop_tabs">
+                <ul class="tabs transparent">
+                    <li class="tab col s3"><a href="#cse"><img src="images/cse.png" id="workshop_img" class="responsive-img"></a></li>
+                    <li class="tab col s3"><a href="#robotics"><img src="images/robotics.png" id="workshop_img" class="circle responsive-img"></a></li>
+                    <li class="tab col s3"><a href="#bridge"><img src="images/bridge.jpg" id="workshop_img" class="circle responsive-img"></a></li>
+                    <li class="tab col s3"><a href="#app"><img src="images/app.png" id="workshop_img" class="circle responsive-img"></a></li>
+                </ul>
+            </div>
+            <div id="cse" class="col s12"></div>
+            <div id="robotics" class="col s12"></div>
+            <div id="bridge" class="col s12"></div>
+            <div id="app" class="col s12"></div>
+
             <div class="col s12" id="events_section">
                 <!-- Teal page content  -->
-                  
+                    <div class="row">
+                    </div>
             </div>
         </div>
 
-        
-
-        <script>
-                
-       
-</script>
             
     </body>
 </html>
