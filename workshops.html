@@ -84,22 +84,23 @@
             
             userData.once("value", function(snap) {
                 console.log("initial data loaded!", snap.val());
-                var para = document.createElement("span");
-                var username = document.createTextNode(snap.val().user_name + "!");
-                para.appendChild(username);
-                document.getElementById("welcome_message").appendChild(para);
                 
-                var dept = document.createTextNode(snap.val().department);
+                
+                var username = document.createTextNode(snap.val().user_name);
+                document.getElementById("welcome_message_nav").appendChild(username);
+                
+                //var dept = document.createTextNode(snap.val().department);
                 if(snap.val().wbut_roll == undefined){
                     redirect_update();
                 }
+                /*
                 document.getElementById("department").appendChild(dept);
                 
                 var regyear = document.createTextNode(snap.val().reg_year);
                 document.getElementById("reg_year").appendChild(regyear);
 
                 var wbroll = document.createTextNode(snap.val().wbut_roll);
-                document.getElementById("wbut_roll").appendChild(wbroll);
+                document.getElementById("wbut_roll").appendChild(wbroll);*/
 
                 document.getElementById("profile_pic_nav").src = profile_pic;
             });
@@ -128,7 +129,7 @@
             function card_creator(title, details, image_url, prerequisites, schedule){
                 var newElement = document.createElement('div');
                 newElement.innerHTML = "\
-                <div class='card large' id='event_card'> \
+                <div class='card medium' id='event_card'> \
                     <div class='card-image waves-effect waves-block waves-light'> \
                         <img class='activator' src=" + image_url + "> \
                     </div> \
@@ -165,7 +166,7 @@
                     <a href="#" class="brand-logo">Logo</a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><img src="" alt="" id="profile_pic_nav" class="circle responsive-img"> </li>
+                        <li><a href="profile.html"><img src="" alt="" id="profile_pic_nav" class="circle responsive-img"><span id="welcome_message_nav"></span></li></a>
                         <li><a href="profile.html">Home</a></li>
                         <li class="active"><a href="workshops.html">Workshops</a></li>
                         <li><a href="quizes.html">Quizes</a></li>

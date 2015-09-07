@@ -85,5 +85,10 @@ body{
 
 #profile_pic_nav{
 	padding: 10px;
-	height: 90%;	
+	height: 100%;
+	float: left;
+}
+
+#welcome_message_nav{
+	padding-right: 20px;
 }
