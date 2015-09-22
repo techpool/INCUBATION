@@ -105,11 +105,52 @@
                 });
             }
             
-            function dr(){
-                var email = document.getElementById("email").value;
-                var password = document.getElementById("password").value;
-                userCreation_normal(email, password, sectionName);
+            function inputFieldBlankCheck(idName){
+                if (document.getElementById(idName).value == '') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
 
+            function confirmForm(){
+                if (inputFieldBlankCheck('email')) {
+                    alert('Please enter an EMAIL ID');
+                    return false;
+                };
+
+                if (inputFieldBlankCheck('username')) {
+                    alert('Please enter your Full Name');
+                    return false;
+                };
+
+                if (inputFieldBlankCheck('reg_year')) {
+                    alert('Please enter your registration year.');
+                    return false;
+                };
+
+                if (inputFieldBlankCheck('wbut_roll')) {
+                    alert('Please enter your WBUT Roll Number');
+                    return false;
+                };
+
+                if (inputFieldBlankCheck('password')) {
+                    alert('Please enter a reasonable password.');
+                    return false;
+                };
+
+                return true;
+
+            }
+
+
+            function dr(){
+                if(confirmForm()){
+                    var email = document.getElementById("email").value;
+                    var password = document.getElementById("password").value;
+                    userCreation_normal(email, password, sectionName);
+                };
+                
             }
 
             
@@ -169,7 +210,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="username" type="text" class="validate" required>
-                        <label for="username">Username</label>
+                        <label for="username">Full Name</label>
                     </div>
                 </div>
 
