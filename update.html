@@ -61,7 +61,8 @@
             
             function setDetails(){
                     logincheck();
-                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({                        
+                    usersRef.child(email.toLowerCase().replace(/\W+/g, "")).update({
+                        username: document.getElementById('username').value,                        
                         reg_year: document.getElementById('reg_year').value,
                         wbut_roll: document.getElementById('wbut_roll').value,
                         department: $('input[name=dept]:checked').val(),
@@ -118,6 +119,13 @@
         
     <div class="container">
         <div class="form">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="username" type="text" class="validate" required>
+                    <label for="username">Full Name</label>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="input-field col s12">
