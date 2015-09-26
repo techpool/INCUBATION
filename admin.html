@@ -60,15 +60,14 @@
                 logincheck();
                 users.orderByChild("registration_time").on("child_added", function(snapshot) {
                     console.log(snapshot.val().department);
-                    var temp = snapshot.val().department;
-                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year, snapshot.val().section);
+                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, snapshot.val().department, snapshot.val().reg_year, snapshot.val().section, snapshot.val().email);
 
                 });
             }
 
             
 
-            function updateTable(wbut_roll, user_name, dept, reg_year, sectionName) {
+            function updateTable(wbut_roll, user_name, dept, reg_year, sectionName, email) {
                 console.log(dept);
                 console.log(wbut_roll);
                 console.log(user_name);
@@ -167,8 +166,10 @@
                     var row = table.insertRow(-1);
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
                     cell1.innerHTML = wbut_roll;
                     cell2.innerHTML = user_name;
+                    cell3.innerHTML = email;
                 } else{
 
                     if (dept == "ME"){
@@ -197,9 +198,10 @@
                     var row = table.insertRow(-1);
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
                     cell1.innerHTML = wbut_roll;
                     cell2.innerHTML = user_name;
-
+                    cell3.innerHTML = email;
                 };
             }
             
