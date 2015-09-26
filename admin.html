@@ -61,111 +61,140 @@
                 users.orderByChild("registration_time").on("child_added", function(snapshot) {
                     console.log(snapshot.val().department);
                     var temp = snapshot.val().department;
-                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year);
+                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year, snapshot.val().sectionName);
 
                 });
             }
 
             
 
-            function updateTable(wbut_roll, user_name, dept, reg_year) {
+            function updateTable(wbut_roll, user_name, dept, reg_year, sectionName) {
                 console.log(dept);
                 console.log(wbut_roll);
                 console.log(user_name);
 
-                if(dept == "CSE"){
-                    if (reg_year == "2015"){
-                        table = document.getElementById("CSE_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("CSE_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("CSE_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("CSE_4th");
-                    }
-                    
-                } else if (dept == "ME"){
-                    if(reg_year == "2015") {
-                        table = document.getElementById("ME_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("ME_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("ME_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("ME_4th");
-                    }
+                if (sectionName == "B. Tech") {
 
-                } else if (dept == "CE"){
-                    if (reg_year == "2015") {
-                        table = document.getElementById("CE_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("CE_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("CE_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("CE_4th");
-                    } 
+                    if(dept == "CSE"){
+                        if (reg_year == "2015"){
+                            table = document.getElementById("CSE_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("CSE_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("CSE_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("CSE_4th");
+                        }
+                        
+                    } else if (dept == "ME"){
+                        if(reg_year == "2015") {
+                            table = document.getElementById("ME_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("ME_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("ME_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("ME_4th");
+                        }
 
-                } else if (dept == "ECE1"){
-                    if (reg_year == "2015") {
-                        table = document.getElementById("ECE1_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("ECE1_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("ECE1_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("ECE1_4th");
+                    } else if (dept == "CE"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("CE_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("CE_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("CE_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("CE_4th");
+                        } 
+
+                    } else if (dept == "ECE1"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("ECE1_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("ECE1_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("ECE1_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("ECE1_4th");
+                        }
+
+                    } else if (dept == "ECE2"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("ECE2_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("ECE2_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("ECE2_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("ECE2_4th");
+                        }
+
+                    } else if (dept == "EE1"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("EE1_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("EE1_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("EE1_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("EE1_4th");
+                        } 
+
+                    } else if (dept == "EE2"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("EE2_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("EE2_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("EE2_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("EE2_4th");
+                        }
+                        
+                    } else if (dept == "AEIE"){
+                        if(reg_year == "2015") {
+                            table = document.getElementById("AEIE_1st");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("AEIE_2nd");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("AEIE_3rd");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("AEIE_4th");
+                        };
+
                     }
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = wbut_roll;
+                    cell2.innerHTML = user_name;
+                } else{
 
-                } else if (dept == "ECE2"){
-                    if (reg_year == "2015") {
-                        table = document.getElementById("ECE2_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("ECE2_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("ECE2_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("ECE2_4th");
-                    }
+                    if (dept == "ME"){
+                        if(reg_year == "2015") {
+                            table = document.getElementById("ME_1st_diploma");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("ME_2nd_diploma");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("ME_3rd_diploma");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("ME_4th_diploma");
+                        }
 
-                } else if (dept == "EE1"){
-                    if (reg_year == "2015") {
-                        table = document.getElementById("EE1_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("EE1_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("EE1_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("EE1_4th");
-                    } 
-
-                } else if (dept == "EE2"){
-                    if (reg_year == "2015") {
-                        table = document.getElementById("EE2_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("EE2_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("EE2_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("EE2_4th");
-                    }
-                    
-                } else if (dept == "AEIE"){
-                    if(reg_year == "2015") {
-                        table = document.getElementById("AEIE_1st");
-                    } else if (reg_year == "2014") {
-                        table = document.getElementById("AEIE_2nd");
-                    } else if (reg_year == "2013") {
-                        table = document.getElementById("AEIE_3rd");
-                    } else if (reg_year == "2012") {
-                        table = document.getElementById("AEIE_4th");
+                    } else if (dept == "CE"){
+                        if (reg_year == "2015") {
+                            table = document.getElementById("CE_1st_diploma");
+                        } else if (reg_year == "2014") {
+                            table = document.getElementById("CE_2nd_diploma");
+                        } else if (reg_year == "2013") {
+                            table = document.getElementById("CE_3rd_diploma");
+                        } else if (reg_year == "2012") {
+                            table = document.getElementById("CE_4th_diploma");
+                        }
                     };
-                }
-                var row = table.insertRow(-1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                cell1.innerHTML = wbut_roll;
-                cell2.innerHTML = user_name;
+
+                };
             }
             
             $( document ).ready(function(){
@@ -947,6 +976,134 @@
                     <button class="waves-effect waves-light btn-large" onclick="student_transfer()">Post to the student's admin page</button><hr>
                     <button class="waves-effect waves-light btn-large" onclick="student_delete()">Revoke from students</button>
                 </div>
+
+
+
+
+
+                <div class="col s12 m6 l6">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>CE</div>
+                            <div class="collapsible-body">
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#CE1_diploma">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#CE2_diploma">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#CE3_diploma">3rd Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="CE1_diploma" class="col s12">
+                                        <table class="hoverable" id="CE_1st_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CE2_diploma" class="col s12">
+                                        <table class="hoverable" id="CE_2nd_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="CE3_diploma" class="col s12">
+                                        <table class="hoverable" id="CE_3rd_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>ME</div>
+                            <div class="collapsible-body">
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#ME1_diploma">1st Year</a></li>
+                                            <li class="tab col s3"><a href="#ME2_diploma">2nd Year</a></li>
+                                            <li class="tab col s3"><a href="#ME3_diploma">3rd Year</a></li>
+                                        </ul>
+                                    </div>
+                                    <div id="ME1_diploma" class="col s12">
+                                        <table class="hoverable" id="ME_1st_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ME2_diploma" class="col s12">
+                                        <table class="hoverable" id="ME_2nd_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="ME3_diploma" class="col s12">
+                                        <table class="hoverable" id="ME_3rd_diploma">
+                                            <thead>
+                                                <tr>
+                                                    <th data-field="id">WBUT ROLL</th>
+                                                    <th data-field="name">User Name</th>
+                                                    <th data-field="price">Email</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
 
     
     </body>
