@@ -61,7 +61,7 @@
                 users.orderByChild("registration_time").on("child_added", function(snapshot) {
                     console.log(snapshot.val().department);
                     var temp = snapshot.val().department;
-                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year, snapshot.val().sectionName);
+                    updateTable(snapshot.val().wbut_roll, snapshot.val().user_name, temp, snapshot.val().reg_year, snapshot.val().section);
 
                 });
             }
@@ -193,6 +193,12 @@
                             table = document.getElementById("CE_4th_diploma");
                         }
                     };
+                    
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = wbut_roll;
+                    cell2.innerHTML = user_name;
 
                 };
             }
