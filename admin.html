@@ -258,7 +258,9 @@
             }
 
             function student_transfer(){
+                console.log("I am here");
                 users.on("value", function(snapshot) {
+                    console.log(snapshot.val());
                     usersSTADMIN.set(snapshot.val());
                 });
 
